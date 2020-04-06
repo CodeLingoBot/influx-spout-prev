@@ -257,6 +257,7 @@ write:
 		var request *pendingKex
 		var sent bool
 
+		inner:
 		for request == nil || !sent {
 			var ok bool
 			select {
@@ -265,7 +266,7 @@ write:
 					break write
 				}
 			case <-t.requestKex:
-				break
+				break inner
 			}
 
 			if !sent {
